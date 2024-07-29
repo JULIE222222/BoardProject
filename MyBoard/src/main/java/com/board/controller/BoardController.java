@@ -67,7 +67,20 @@ public class BoardController {
 		return "list";
 	}
 	
-	
+	@GetMapping(value = "/view.do")
+	public String openBoardDetail(@RequestParam(value = "idx", required = false) Long idx, Model model) {
+		if (idx == null) {
+			return "redirect:/list.do";
+		}
+
+		BoardDTO board = boardService.getBoardDetail(idx);
+		if (board == null || "Y".equals(board.getDeleteYn())) {
+			return "redirect:/list.do";
+		}
+		model.addAttribute("board", board);
+
+		return "view";
+	}
 	
 
 }
