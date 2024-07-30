@@ -82,5 +82,28 @@ public class BoardController {
 		return "view";
 	}
 	
+	@PostMapping(value = "/delete.do")
+	public String deleteBoard(@RequestParam(value = "idx", required = false) Long idx) {
+	    if (idx == null) {
+	        System.out.println("올바르지 않은 접근: idx가 null입니다.");
+	        return "redirect:/list.do"; // 리다이렉트는 문제가 없지만 로그를 좀 더 구체적으로 남기는 것이 좋습니다.
+	    }
 
+	    try {
+	        boolean isDeleted = boardService.deleteBoard(idx);
+	        if (!isDeleted) {
+	            System.out.println("게시글 삭제 실패: idx=" + idx);
+	        }
+	    } catch (DataAccessException e) {
+	        System.out.println("DB 처리과정 문제: " + e.getMessage());
+	        // 로그를 남기거나 다른 처리 방안을 고려할 수 있습니다.
+	    } catch (Exception e) {
+	        System.out.println("시스템 문제 발생: " + e.getMessage());
+	        // 시스템 문제에 대한 보다 구체적인 처리를 추가할 수 있습니다.
+	    }
+	    
+	    return "redirect:/list.do"; 
+	}
+
+	
 }
