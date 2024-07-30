@@ -19,7 +19,7 @@ public class BoardDTO {
 	private String deleteYn;
 	private LocalDateTime insertTime;
 	private LocalDateTime updateTime;
-	private LocalDateTime delectTime;
+	private LocalDateTime deleteTime;
 	
 
 }

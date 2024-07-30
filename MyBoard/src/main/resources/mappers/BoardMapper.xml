@@ -74,6 +74,7 @@
 			<include refid="boardColumns" />
 		FROM
 			board
+		WHERE delete_yn = 'N'
 		ORDER BY
 			notice_yn ASC,
 			idx DESC,
