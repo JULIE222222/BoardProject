@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BoardDTO {
+public class BoardDTO extends CommonDTO {
 	
 	private Long idx;
 	private String title;
@@ -21,5 +21,14 @@ public class BoardDTO {
 	private LocalDateTime updateTime;
 	private LocalDateTime deleteTime;
 	
-
+	
+	@Override
+	public String toString() {
+		return "BoardDTO [idx=" + idx + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", viewCnt=" + viewCnt + ", noticeYn=" + noticeYn + ", secretYn=" + secretYn + ", deleteYn="
+				+ deleteYn + ", insertTime=" + insertTime + ", updateTime=" + updateTime + ", deleteTime=" + deleteTime
+				+ "]";
+	}
+	
+	
 }
