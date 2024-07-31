@@ -29,22 +29,22 @@ public class BoardController {
 	 */
 	
 	
-	@GetMapping(value = "/write.do")
+	@GetMapping(value = "/board/write.do")
 	public String openBoardWrite(@RequestParam(value = "idx", required = false) Long idx, Model model) {
 		if (idx == null) {
 			model.addAttribute("board", new BoardDTO());
 		} else {
 			BoardDTO board = boardService.getBoardDetail(idx);
 			if (board == null) {
-				return "redirect:/list.do";
+				return "redirect:/board/list.do";
 			}
 			model.addAttribute("board", board);
 		}
-		return "write";
+		return "board/write";
 	}
 	
 	
-	@PostMapping(value = "/register.do")
+	@PostMapping(value = "/board/register.do")
 	public String registerBoard(final BoardDTO params) {
 		try {
 			boolean isRegistered = boardService.registerBoard(params);
@@ -56,37 +56,37 @@ public class BoardController {
 		} catch (Exception e) {
 			System.out.println("시스템에 문제가 발생");
 		}
-		return "redirect:/list.do";
+		return "redirect:/board/list.do";
 	}
 
-	@GetMapping(value = "/list.do")
+	@GetMapping(value = "/board/list.do")
 	public String openBoardList(Model model) {
 		List<BoardDTO> boardList = boardService.getBoardList();
 		model.addAttribute("boardList", boardList);
 
-		return "list";
+		return "board/list";
 	}
 	
-	@GetMapping(value = "/view.do")
+	@GetMapping(value = "/board/view.do")
 	public String openBoardDetail(@RequestParam(value = "idx", required = false) Long idx, Model model) {
 		if (idx == null) {
-			return "redirect:/list.do";
+			return "redirect:/board/list.do";
 		}
 
 		BoardDTO board = boardService.getBoardDetail(idx);
 		if (board == null || "Y".equals(board.getDeleteYn())) {
-			return "redirect:/list.do";
+			return "redirect:/board/list.do";
 		}
 		model.addAttribute("board", board);
 
-		return "view";
+		return "board/view";
 	}
 	
-	@PostMapping(value = "/delete.do")
+	@PostMapping(value = "/board/delete.do")
 	public String deleteBoard(@RequestParam(value = "idx", required = false) Long idx) {
 	    if (idx == null) {
 	        System.out.println("올바르지 않은 접근: idx가 null입니다.");
-	        return "redirect:/list.do"; // 리다이렉트는 문제가 없지만 로그를 좀 더 구체적으로 남기는 것이 좋습니다.
+	        return "redirect:/board/list.do"; // 리다이렉트는 문제가 없지만 로그를 좀 더 구체적으로 남기는 것이 좋습니다.
 	    }
 
 	    try {
@@ -102,7 +102,7 @@ public class BoardController {
 	        // 시스템 문제에 대한 보다 구체적인 처리를 추가할 수 있습니다.
 	    }
 	    
-	    return "redirect:/list.do"; 
+	    return "redirect:/board/list.do"; 
 	}
 
 	

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.zn/thymeleaf/layout" layout:decorate="layout/basic">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.zn/thymeleaf/layout" layout:decorate="board/layout/basic">
 	<th:block layout:fragment="title">
 		<title>This is a list page</title>
 	</th:block>
@@ -30,7 +30,7 @@
 						<td scope="row" th:text="${#strings.equals( row.noticeYn, 'Y' ) ? '공지' : row.idx}"></td>
 						
 						<td class="text-left">
-							  <a th:href="@{/view.do(idx=${row.idx})}" th:text="${row.title}"></a>
+							  <a th:href="@{/board/view.do(idx=${row.idx})}" th:text="${row.title}"></a>
 						</td>
 						
 						<td th:text="${row.writer}"></td>
@@ -38,13 +38,13 @@
 						<td th:text="${row.viewCnt}"></td>
 					</tr>
 					<tr th:unless="${not #lists.isEmpty( boardList )}">
-						<td>조회된 결과가 없습니다.</td>
+						<td colspan="5">조회된 결과가 없습니다.</td>
 					</tr>
 				</tbody>
 			</table>
 			
 			<div class="btn_wrap text-right">
-				<a th:href="@{/write.do}" class="btn btn-primary waves-effect waves-light">Write</a>
+				<a th:href="@{/board/write.do}" class="btn btn-primary waves-effect waves-light">Write</a>
 			</div>
 			
 			<th:block layout:fragment="paging">
@@ -62,7 +62,7 @@
 				 	<li><a href="#">5</a></li>
 				 	<li>
 				 		<a href="#" aria-label="Next">
-				 			<span aria-hidden="true">&requo;</span>
+				 			 <span aria-hidden="true">&raquo;</span> 
 				 		</a>
 				 	</li>
 				 </ul>
